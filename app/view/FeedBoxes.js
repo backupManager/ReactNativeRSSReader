@@ -70,7 +70,7 @@ export default class FeedBoxes extends Component {
      }else{
        Alert.alert('Delete Error','oop! something wrong happended');
      }
-     Alert.alert('Delete Success','RSS delete from subscrition successfully',)
+     Alert.alert('Delete Success','RSS deleted from subscription',)
    }
 
 
@@ -87,10 +87,10 @@ export default class FeedBoxes extends Component {
       return(
         <View style={styles.container}>
           <Text style={styles.tipsText}>
-            您还没有订阅rss
+            No RSS Subscription
           </Text>
           <Text style={styles.tipsText}>
-            点击右上角搜索rss订阅
+
           </Text>
         </View>
       )
@@ -101,14 +101,14 @@ export default class FeedBoxes extends Component {
         dataSource={ds.cloneWithRows(this.state.feedArchive)}
         rightOpenValue={-75}
         renderHiddenRow={ data => (
-                <View style={styles.rowBackContainer}>
+
                   <TouchableOpacity style={styles.rowBack}
                     onPress={()=>{
                       this.deleteFeed(data);
                     }}>
                       <Text style={{color:'white'}}>Delete</Text>
                   </TouchableOpacity>
-                </View>
+
             )}
         renderRow={
           (data)=>(
@@ -122,8 +122,13 @@ export default class FeedBoxes extends Component {
               <Text style={styles.title}>{myIcon}  {data.title}</Text>
             </TouchableHighlight>)
         }
+        renderSeparator={
+          (sectionID, rowID, adjacentRowHighlighted)=>
+          <View key={rowID} style={{marginHorizontal:10}}>
+            <View style={{height:1, backgroundColor:'#efefef'}}/>
+          </View>
+        }
         />
-
     )
   }
 }
@@ -131,13 +136,12 @@ export default class FeedBoxes extends Component {
 const styles = StyleSheet.create({
   container:{
     paddingTop:85,
-    marginHorizontal:15,
+    // marginLeft:15,
   },
   row:{
     flexDirection:'row',
-    padding:10,
-    borderBottomWidth:1,
-    borderColor:'#efefef',
+    padding:15,
+    paddingLeft:20,
     backgroundColor:"white",
   },
   logo:{
@@ -147,18 +151,14 @@ const styles = StyleSheet.create({
   },
   title:{
     flex:10,
-    fontWeight:"bold",
-    fontSize:15
-  },
-  rowBackContainer:{
-    alignItems:'flex-end',
-    flex:1,
-
+    fontSize:15,
   },
   rowBack:{
     flex:1,
     backgroundColor:"red",
-    padding:12,
+    padding:18,
+    position:'absolute',
+    right:0
   },
   tipsText:{
     color:'grey',

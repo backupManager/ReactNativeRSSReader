@@ -10,6 +10,7 @@ import {
   Alert,
   Image,
   Button,
+  Platform,
   Text,
 } from 'react-native';
 
@@ -49,14 +50,14 @@ export default class FeedSearch extends Component {
   saveFeed(feed){
     feedArchive = this.state.feedArchive;
     if(this.checkDuplicated(feed,feedArchive)){
-      return Alert.alert('Already Subscribed', 'This RSS has been subscribed before' )
+      return Alert.alert('Already Subscribed', 'This RSS has been subscribed' )
     }
     feedArchive.push(feed);
     this.setState({
       feedArchive:feedArchive
     })
     AsyncStorage.setItem('feedArchive',JSON.stringify(feedArchive))
-    Alert.alert('Success', 'this RSS is now in your FeedBoxes');
+    // Alert.alert('SUCCESS', 'RSS subscribed successfully');
 
   }
 
@@ -122,7 +123,8 @@ export default class FeedSearch extends Component {
                       })
                     }
                   }>
-                  <Image style={styles.logo} source={{uri:obj.visualUrl}}/>
+                  { obj.visualUrl && <Image style={styles.logo} source={{uri:obj.visualUrl}}/>}
+
                   <View style={{flex:8,marginHorizontal:10}}>
                     <Text style={styles.title}>{obj.title}</Text>
                     <Text>lastUpdated: {moment.unix(obj.lastUpdated/1000).format('YYYY-MM-DD HH:mm')}</Text>
@@ -157,20 +159,21 @@ const styles = StyleSheet.create({
   input:{
     height:40,
     borderColor:'grey',
-    borderWidth:1,
+    borderWidth:(Platform.OS === 'ios') ? 1 : 0,
     borderRadius:5,
     paddingHorizontal:10,
     margin:20
   },
   title:{
-    fontWeight:'bold',
-    fontSize:15
+    fontSize:15,
+    marginBottom:3
   },
   logo:{
     flex:3,
     maxWidth:60,
     maxHeight:60,
-    borderRadius:5
+    borderRadius:5,
+
   },
   checkmark:{
     flex:0.5,
@@ -180,8 +183,6 @@ const styles = StyleSheet.create({
   row:{
     flex:1,
     flexDirection:'row',
-    // alignItems:'center',
-    // justifyContent:'space-between',
     padding:10,
     minHeight:80,
   },

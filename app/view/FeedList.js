@@ -17,6 +17,7 @@ export default class FeedList extends Component {
     var ds = new ListView.DataSource({rowHasChanged:(r1,r2)=>r1 !== r2});
     this.state = {
       refreshing:true,
+      loadmore:false,
       publisher:null,
       dataSource:ds.cloneWithRows([]),
       nextPosition:null,
@@ -42,7 +43,7 @@ export default class FeedList extends Component {
           nextPosition:data.next_position,
           count:count+10
         });
-        setTimeout(()=>this.setState({refreshing:false}), 0);
+        setTimeout(()=>this.setState({refreshing:false, loadmore:false}), 0);
       })
   }
 
@@ -54,9 +55,12 @@ export default class FeedList extends Component {
           dataSource={this.state.dataSource}
           onEndReachedThreshold={20}
           onEndReached={()=>{
+
             if(!this.state.refreshing){
               console.log("endReached");
+              this.setState({loadmore:true})
               this.getFeeds(this.props.feedURL, this.state.count)
+
             }
           }}
           refreshControl={
@@ -75,14 +79,15 @@ export default class FeedList extends Component {
               navigator = {this.props.navigator}
             />
           )}
-
           renderSeparator={
             (sectionID, rowID, adjacentRowHighlighted)=>
             <View key={rowID} style={{marginHorizontal:10}}>
               <View style={{height:1, backgroundColor:'#efefef'}}/>
             </View>
           }
-          />
+          renderFooter ={()=>(
+            this.state.loadmore && <ActivityIndicator style={{padding:10}}size="large"/>)}
+        />
 
     )
   }

@@ -66,12 +66,10 @@ exports.routeMapper={
    },
 
    Title: (route, navigator, index, navState) =>{
-
      return (<Text style={[styles.all,styles.title]}>{route.title}</Text>)
    }
 
 }
-
 
 
 const styles = StyleSheet.create({
@@ -82,8 +80,11 @@ const styles = StyleSheet.create({
   leftBtn:{
   },
   title:{
-    marginTop:15,
+    // marginTop:15,
     fontSize:15,
-    fontWeight:'bold'
+    textAlign:'center',
+    // position:'relative',
+    // bottom:10,
+    // fontWeight:'bold'
   }
 })

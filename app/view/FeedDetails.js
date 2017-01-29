@@ -8,6 +8,7 @@ import {
   WebView,
   Alert,
   Dimensions,
+  Platform,
   Linking,
 } from 'react-native'
 var HTMLView = require('react-native-htmlview')
@@ -55,8 +56,8 @@ export default class FeedDetails extends Component {
             style={styles.linkButton}>
             <Button
               onPress={()=>this._handleClick(this.props.feedDetails.content.url)}
-              title="visit original link"
-              color="#841584"
+              title={"view on "+ this.props.feedDetails.content.domain}
+              color="royalblue"
             />
           </View>
 
@@ -70,13 +71,11 @@ const styles = StyleSheet.create({
     flex:1,
     marginTop:65,
     paddingHorizontal:15,
-
   },
   title:{
     marginVertical:10,
     fontSize:20,
     fontWeight:'bold',
-
   },
   infos:{
     color:'grey'
@@ -87,7 +86,9 @@ const styles = StyleSheet.create({
     marginVertical:15,
   },
   linkButton:{
-    borderWidth:1,
+    borderWidth:(Platform.OS === 'ios') ? 1 : 0,
+    borderRadius:5,
+    // borderColor:'royalblue',
     marginHorizontal:40,
     marginBottom:50,
   }

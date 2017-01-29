@@ -36,11 +36,9 @@ export default class FeedItem extends Component {
 var styles = StyleSheet.create({
     feedTitle:{
       fontSize:15,
-      fontWeight: 'bold',
     },
     feedInfo:{
       paddingVertical:5,
-
     },
     feedDescription:{
       color:'gray',
