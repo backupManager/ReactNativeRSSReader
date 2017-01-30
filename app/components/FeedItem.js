@@ -19,7 +19,7 @@ export default class FeedItem extends Component {
       <TouchableOpacity
         onPress={()=>{
           this.props.navigator.push(
-                {key:"FeedDetails", passProps:{feedDetails:this.props.feed}})
+                {key:"FeedDetails", title:this.props.title,passProps:{feedDetails:this.props.feed, }})
         }}>
           <View style={{padding:10}}>
             <Text style={styles.feedTitle}>{this.props.feed.content.title}</Text>

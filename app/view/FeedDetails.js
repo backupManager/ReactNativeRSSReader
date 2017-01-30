@@ -46,7 +46,9 @@ export default class FeedDetails extends Component {
           </View>
 
           <View style={styles.webViewContent}>
-            <HTMLView
+          {/* <WebView style={{width:width-20,height:height}}
+            source={{html:this.props.feedDetails.content.body}}/>*/}
+             <HTMLView
               onLinkPress={()=>(Alert.alert(`I\'M SORRY`, "Not Supported"))}
               value={this.props.feedDetails.content.body}
               />
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
   webViewContent:{
     // maxWidth:width,
     // height:height,
-    marginVertical:15,
+    marginVertical:15
   },
   linkButton:{
     borderWidth:(Platform.OS === 'ios') ? 1 : 0,

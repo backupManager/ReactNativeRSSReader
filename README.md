@@ -9,5 +9,7 @@ a simple RSS reader written in React Native.
 * Because digg.com can't be access in mainland China, So YARRD uses Yahoo Query Language to request data from digg.com'API.
 
 ### Remain Issues
-* **HTML contents can't render well.** Some rss data contain HTML contents, like `<p>` and `<img>`, but these HTML contents can't render well, Both in React Native { WebView } Component and 3rd party library react-native-htmlview . Currently using react-native-htmlview.
+* **HTML contents don't render well.** Some rss data contain HTML contents, like `<p>` and `<img>`, but these HTML contents don't render well, Both in React Native { WebView } Component and 3rd party library react-native-htmlview . Currently using react-native-htmlview.
 * **Data response from YQL sometimes differ from the data response from original url.**
+
+[YARRD中文介绍](https://chasecs.github.io/2017/01/30/yaardIntroduction.html)
